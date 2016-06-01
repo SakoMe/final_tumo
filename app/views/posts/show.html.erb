@@ -1,0 +1,33 @@
+<div id="post_show" class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="panel panel-default">
+      <div class="panel-heading post_image">
+        <%= image_tag @post.image.url %>
+      </div>
+      <div class="panel-body">
+        <h1><%= @post.title %></h1>
+        <p class="description"><%= @post.description %></p>
+      </div>
+      <div class="panel-footer">
+        <div class="row">
+          <div class="col-md-6">
+            <p class="user">Submitted by <%= @post.user.email %></p>
+          </div>
+          <div class="col-md-6">
+            <div class="btn-group pull-right">
+              <%= link_to like_post_path(@post), method: :put, class: "btn btn-default" do %>
+              <i class="fa fa-heart" aria-hidden="true">
+              <%= @post.get_upvotes.size %>
+              </i>
+              <% end %>
+              <% if user_signed_in? && @post.user == current_user %>
+              <%= link_to "Edit", edit_post_path, class: "btn btn-default" %>
+              <%= link_to "Delete", post_path, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-default" %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
